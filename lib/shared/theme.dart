@@ -1,5 +1,7 @@
 part of 'shared.dart';
 
+double edge = 24;
+
 Color purpleColor = const Color(0xff5843BE);
 Color orangeColor = const Color(0xffFF9376);
 Color blackColor = const Color(0xff000000);
@@ -26,5 +28,10 @@ TextStyle whiteTextStyle = GoogleFonts.poppins(
 TextStyle purpleTextStyle = GoogleFonts.poppins(
   fontWeight: FontWeight.w500,
   color: purpleColor,
+);
+
+TextStyle regularTextStyle = GoogleFonts.poppins(
+  fontWeight: FontWeight.w400,
+  color: blackColor,
 );
 
