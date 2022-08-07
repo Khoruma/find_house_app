@@ -1,7 +1,10 @@
 part of 'widgets.dart';
 
 class SpaceCard extends StatelessWidget {
-  const SpaceCard({Key? key}) : super(key: key);
+
+  final Space space;
+
+  const SpaceCard(this.space);
 
   @override
   Widget build(BuildContext context) {
@@ -9,19 +12,17 @@ class SpaceCard extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(18),
-          child: Container(
-            height: 130,
-            width: 110,
+          child: SizedBox(
+            width: 130,
+            height: 110,
             child: Stack(
               children: [
-                Image.asset(
-                  'assets/recomended3.png',
-                ),
+                Image.asset(space.imageUrl!),
                 Align(
                   alignment: Alignment.topRight,
                   child: Container(
-                    height: 30,
                     width: 70,
+                    height: 30,
                     decoration: BoxDecoration(
                       color: purpleColor,
                       borderRadius: const BorderRadius.only(
@@ -38,8 +39,10 @@ class SpaceCard extends StatelessWidget {
                           height: 22,
                         ),
                         Text(
-                          '4/5',
-                          style: whiteTextStyle.copyWith(fontSize: 13),
+                          "${space.rating}/5",
+                          style: whiteTextStyle.copyWith(
+                            fontSize: 13,
+                          ),
                         )
                       ],
                     ),
@@ -49,6 +52,34 @@ class SpaceCard extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(width: 20),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              space.name!,
+              style: blackTextStyle.copyWith(fontSize: 18),
+            ),
+            const SizedBox(height: 2),
+            Text.rich(
+              TextSpan(
+                text: "\$${space.price}",
+                style: purpleTextStyle.copyWith(fontSize: 16),
+                children: [
+                  TextSpan(
+                    text: " / month",
+                    style: greyTextStyle.copyWith(fontSize: 16),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              "${space.city}, ${space.country}",
+              style: greyTextStyle.copyWith(fontSize: 14),
+            )
+          ],
+        )
       ],
     );
   }

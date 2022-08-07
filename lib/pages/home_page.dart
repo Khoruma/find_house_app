@@ -6,10 +6,11 @@ class HomePages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(vertical: edge),
+      body: SafeArea(
+        bottom: false,
         child: ListView(
           children: [
+            SizedBox(height: edge),
             //* NOTE: TITLE/HEADER
             Padding(
               padding: EdgeInsets.only(left: edge),
@@ -64,16 +65,126 @@ class HomePages extends StatelessWidget {
             const SizedBox(height: 30),
             //* NOTE: RECOMMENDED SPACE
             Padding(
-              padding: EdgeInsets.only(left: edge),
+              padding: EdgeInsets.symmetric(horizontal: edge),
               child: Text(
                 "Recommended Space",
                 style: regularTextStyle.copyWith(fontSize: 16),
               ),
             ),
-            SpaceCard(),
+            const SizedBox(height: 16),
+            Padding(
+              padding: EdgeInsets.only(left: edge),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SpaceCard(
+                    Space(
+                      id: 1,
+                      imageUrl: 'assets/recomended1.png',
+                      name: "Kuretakeso Hott",
+                      price: 52,
+                      city: "Bandung",
+                      country: "Germany",
+                      rating: 4,
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  SpaceCard(
+                    Space(
+                      id: 2,
+                      imageUrl: 'assets/recomended2.png',
+                      name: "Roemah Nenek",
+                      price: 11,
+                      city: "Bogor",
+                      country: "Seattle",
+                      rating: 5,
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  SpaceCard(
+                    Space(
+                      id: 3,
+                      imageUrl: 'assets/recomended3.png',
+                      name: "Darrling How",
+                      price: 20,
+                      city: "Jakarta",
+                      country: "Indonesia",
+                      rating: 3,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 30),
+            //* NOTE: TIPS AND GUIDANCE
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: edge),
+              child: Text(
+                "Recommended Space",
+                style: regularTextStyle.copyWith(fontSize: 16),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: edge),
+              child: Column(
+                children: [
+                  TipsGuideCard(
+                    Tips(
+                      id: 1,
+                      name: "City Guidelines",
+                      imageUrl: 'assets/icon_tips1.png',
+                      upadate: "Updated 20 Apr",
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  TipsGuideCard(
+                    Tips(
+                      id: 2,
+                      name: "Jakarta Fairship",
+                      imageUrl: 'assets/icon_tips2.png',
+                      upadate: "Updated 11 Dec",
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 50 + edge),
           ],
         ),
       ),
+      //* NOTE: NAVIGATION BAR
+      floatingActionButton: Container(
+        height: 65,
+        width: MediaQuery.of(context).size.width - (2 * edge),
+        margin: EdgeInsets.symmetric(horizontal: edge),
+        decoration: BoxDecoration(
+          color: const Color(0xffF6F7F8),
+          borderRadius: BorderRadius.circular(23),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            BottomNavigationItem(
+              imageUrl: "assets/icon_home.png",
+              isActive: true,
+            ),
+            BottomNavigationItem(
+              imageUrl: "assets/icon_mail.png",
+              isActive: false,
+            ),
+            BottomNavigationItem(
+              imageUrl: "assets/icon_card.png",
+              isActive: false,
+            ),
+            BottomNavigationItem(
+              imageUrl: "assets/icon_love.png",
+              isActive: false,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
