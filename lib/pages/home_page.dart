@@ -149,7 +149,7 @@ class HomePages extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 50 + edge),
+            SizedBox(height: 75 + edge),
           ],
         ),
       ),
@@ -164,21 +164,21 @@ class HomePages extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
+          children: const [
             BottomNavigationItem(
-              imageUrl: "assets/icon_home.png",
+              imageUrl: "assets/Icon_home.png",
               isActive: true,
             ),
             BottomNavigationItem(
-              imageUrl: "assets/icon_mail.png",
+              imageUrl: "assets/Icon_mail.png",
               isActive: false,
             ),
             BottomNavigationItem(
-              imageUrl: "assets/icon_card.png",
+              imageUrl: "assets/Icon_card.png",
               isActive: false,
             ),
             BottomNavigationItem(
-              imageUrl: "assets/icon_love.png",
+              imageUrl: "assets/Icon_love.png",
               isActive: false,
             ),
           ],
