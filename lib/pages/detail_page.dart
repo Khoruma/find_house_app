@@ -21,11 +21,13 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   Future<void> _launchInBrowser(Uri url) async {
-    if (!await launchUrl(
+    if (!await canLaunchUrl(
       url,
-      mode: LaunchMode.externalApplication,
     )) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const ErrorPage()));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const ErrorPage()),
+      );
     }
   }
 
@@ -42,8 +44,7 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final Uri toLaunch =
-        Uri.parse('https://goo.gl/maps/8ww2ZEaoUjxQYtxc8');
+    final Uri toLaunch = Uri.parse('acvdfil');
 
     return Scaffold(
       backgroundColor: whiteColor,
