@@ -10,10 +10,11 @@ class SpaceCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const DetailPage(),
-            ),);
+          context,
+          MaterialPageRoute(
+            builder: (context) => const DetailPage(),
+          ),
+        );
       },
       child: Row(
         children: [
@@ -24,7 +25,12 @@ class SpaceCard extends StatelessWidget {
               height: 110,
               child: Stack(
                 children: [
-                  Image.asset(space.imageUrl!),
+                  Image.network(
+                    space.imageUrl!,
+                    width: 130,
+                    height: 110,
+                    fit: BoxFit.cover,
+                  ),
                   Align(
                     alignment: Alignment.topRight,
                     child: Container(

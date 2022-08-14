@@ -127,11 +127,6 @@ class _DetailPageState extends State<DetailPage> {
                                   'assets/Icon_star_solid.png',
                                   width: 20,
                                 ),
-                                Image.asset(
-                                  'assets/Icon_star_solid.png',
-                                  width: 20,
-                                  color: const Color(0xff989BA1),
-                                ),
                               ],
                             ),
                           ],

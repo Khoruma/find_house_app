@@ -30,7 +30,7 @@ class ErrorPage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 50),
-              Container(
+              SizedBox(
                 height: 50,
                 width: 210,
                 child: ElevatedButton(
