@@ -1,59 +1,42 @@
 part of 'pages.dart';
 
-class DetailPage extends StatefulWidget {
-  const DetailPage({Key? key}) : super(key: key);
+class DetailPage extends StatelessWidget {
+  final Space space;
 
-  @override
-  State<DetailPage> createState() => _DetailPageState();
-}
-
-class _DetailPageState extends State<DetailPage> {
-  bool hasCallSupport = false;
-  Future<void>? launched;
-  String phone = '082232566512';
-
-  Future<void> makePhoneCall(String phoneNumber) async {
-    final Uri launchUri = Uri(
-      scheme: 'tel',
-      path: phoneNumber,
-    );
-    await launchUrl(launchUri);
-  }
-
-  Future<void> _launchInBrowser(Uri url) async {
-    if (!await canLaunchUrl(
-      url,
-    )) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const ErrorPage()),
-      );
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    // Check for phone call support.
-    canLaunchUrl(Uri(scheme: 'tel', path: '123')).then((bool result) {
-      setState(() {
-        hasCallSupport = result;
-      });
-    });
-  }
+  DetailPage(this.space);
 
   @override
   Widget build(BuildContext context) {
-    final Uri toLaunch = Uri.parse('acvdfil');
+    Future<void>? launched;
 
-    return Scaffold(
+    Future<void> makePhoneCall(String phoneNumber) async {
+      final Uri launchUri = Uri(
+        scheme: 'tel',
+        path: phoneNumber,
+      );
+      await launchUrl(launchUri);
+    }
+
+    Future<void> _launchInBrowser(Uri url) async {
+      if (!await canLaunchUrl(
+        url,
+      )) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ErrorPage()),
+        );
+      }
+    }
+
+    return Scaffold(      
+      
       backgroundColor: whiteColor,
       body: SafeArea(
         bottom: false,
         child: Stack(
           children: [
-            Image.asset(
-              'assets/pic.png',
+            Image.network(
+              space.imageUrl!,
               width: MediaQuery.of(context).size.width,
               height: 350,
               fit: BoxFit.cover,
@@ -83,7 +66,7 @@ class _DetailPageState extends State<DetailPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Kuretakeso Hott",
+                                  space.name!,
                                   style: blackTextStyle.copyWith(
                                     fontSize: 22,
                                   ),
@@ -91,7 +74,7 @@ class _DetailPageState extends State<DetailPage> {
                                 const SizedBox(height: 2),
                                 Text.rich(
                                   TextSpan(
-                                    text: "\$ 52",
+                                    text: "\$ ${space.price}",
                                     style:
                                         purpleTextStyle.copyWith(fontSize: 16),
                                     children: [
@@ -146,21 +129,21 @@ class _DetailPageState extends State<DetailPage> {
                         padding: EdgeInsets.symmetric(horizontal: edge),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
+                          children: [
                             FacilityItem(
                               name: "Kithcen",
                               imageUrl: 'assets/icon_kitchen.png',
-                              total: 2,
+                              total: space.numberOfKitchens,
                             ),
                             FacilityItem(
                               name: "Bedroom",
                               imageUrl: 'assets/icon_bedroom.png',
-                              total: 3,
+                              total: space.numberOfBedrooms,
                             ),
                             FacilityItem(
                               name: "Big Lemari",
                               imageUrl: 'assets/icon_almari.png',
-                              total: 3,
+                              total: space.numberOfCupboards,
                             ),
                           ],
                         ),
@@ -179,30 +162,22 @@ class _DetailPageState extends State<DetailPage> {
                         height: 88,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
-                          children: [
-                            SizedBox(width: edge),
-                            Image.asset(
-                              'assets/photo1.png',
-                              height: 88,
-                              width: 110,
-                              fit: BoxFit.cover,
-                            ),
-                            const SizedBox(width: 18),
-                            Image.asset(
-                              'assets/photo2.png',
-                              height: 88,
-                              width: 110,
-                              fit: BoxFit.cover,
-                            ),
-                            const SizedBox(width: 18),
-                            Image.asset(
-                              'assets/photo3.png',
-                              height: 88,
-                              width: 110,
-                              fit: BoxFit.cover,
-                            ),
-                            SizedBox(width: edge),
-                          ],
+                          children: space.photos!.map((item) {
+                            return Container(
+                              margin: const EdgeInsets.only(
+                                left: 24,
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: Image.network(
+                                  item,
+                                  height: 88,
+                                  width: 110,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            );
+                          }).toList(),
                         ),
                       ),
                       const SizedBox(height: 30),
@@ -221,13 +196,14 @@ class _DetailPageState extends State<DetailPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Jln. Kappan Sukses No. 20 \n Palembang",
+                              "${space.address} \n ${space.city}",
                               style: greyTextStyle.copyWith(fontSize: 14),
                             ),
                             InkWell(
-                              onTap: () => setState(() {
-                                launched = _launchInBrowser(toLaunch);
-                              }),
+                              onTap: () {
+                                launched =
+                                    _launchInBrowser(Uri.parse(space.mapUrl!));
+                              },
                               child: Image.asset(
                                 'assets/btn_location.png',
                                 width: 40,
@@ -251,18 +227,13 @@ class _DetailPageState extends State<DetailPage> {
                               ),
                             ),
                           ),
-                          onPressed: hasCallSupport
-                              ? () => setState(() {
-                                    launched = makePhoneCall(phone);
-                                  })
-                              : null,
-                          child: hasCallSupport
-                              ? Text(
-                                  'Book Now',
-                                  style: whiteTextStyle.copyWith(fontSize: 18),
-                                )
-                              : Text('Calling not supported',
-                                  style: whiteTextStyle.copyWith(fontSize: 18)),
+                          onPressed: () {
+                            launched = makePhoneCall(space.phone!);
+                          },
+                          child: Text(
+                            'Book Now',
+                            style: whiteTextStyle.copyWith(fontSize: 18),
+                          ),
                         ),
                       ),
                       const SizedBox(height: 40),
