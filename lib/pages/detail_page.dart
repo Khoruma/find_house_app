@@ -7,6 +7,8 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        final Uri toLaunch =
+        Uri.parse(space.mapUrl!);
     Future<void>? launched;
 
     Future<void> makePhoneCall(String phoneNumber) async {
@@ -18,18 +20,16 @@ class DetailPage extends StatelessWidget {
     }
 
     Future<void> _launchInBrowser(Uri url) async {
-      if (!await canLaunchUrl(
+      if (!await launchUrl(
         url,
+        mode: LaunchMode.externalApplication,
       )) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const ErrorPage()),
-        );
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const ErrorPage()));
       }
     }
 
-    return Scaffold(      
-      
+    return Scaffold(
       backgroundColor: whiteColor,
       body: SafeArea(
         bottom: false,
@@ -201,8 +201,7 @@ class DetailPage extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                launched =
-                                    _launchInBrowser(Uri.parse(space.mapUrl!));
+                                launched = _launchInBrowser(toLaunch);
                               },
                               child: Image.asset(
                                 'assets/btn_location.png',
