@@ -8,3 +8,4 @@ part 'space_card.dart';
 part 'tips_guide_card.dart';
 part 'bottom_navigation_item.dart';
 part 'facility_item.dart';
+part 'rating_item.dart';

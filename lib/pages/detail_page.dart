@@ -7,8 +7,7 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        final Uri toLaunch =
-        Uri.parse(space.mapUrl!);
+    final Uri toLaunch = Uri.parse(space.mapUrl!);
     Future<void>? launched;
 
     Future<void> makePhoneCall(String phoneNumber) async {
@@ -89,28 +88,15 @@ class DetailPage extends StatelessWidget {
                               ],
                             ),
                             Row(
-                              children: [
-                                Image.asset(
-                                  'assets/Icon_star_solid.png',
-                                  width: 20,
-                                ),
-                                Image.asset(
-                                  'assets/Icon_star_solid.png',
-                                  width: 20,
-                                ),
-                                Image.asset(
-                                  'assets/Icon_star_solid.png',
-                                  width: 20,
-                                ),
-                                Image.asset(
-                                  'assets/Icon_star_solid.png',
-                                  width: 20,
-                                ),
-                                Image.asset(
-                                  'assets/Icon_star_solid.png',
-                                  width: 20,
-                                ),
-                              ],
+                              children: [1, 2, 3, 4, 5].map((index) {
+                                return Container(
+                                  margin:const EdgeInsets.only(left: 2),
+                                  child: RatingItem(
+                                    index: index,
+                                    rating: space.rating,
+                                  ),
+                                );
+                              }).toList(),
                             ),
                           ],
                         ),
