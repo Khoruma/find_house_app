@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "610887354960",
+    "project_id": "findhouse-app",
+    "storage_bucket": "findhouse-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610887354960:android:184b906dff269e76e85f55",
+        "android_client_info": {
+          "package_name": "com.example.find_house_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610887354960-qsqgt3dgfiaslecdeod78pctf73rhe4f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD04Qis20aKD1MVEhpAhX91x4YDCXl6cYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610887354960-qsqgt3dgfiaslecdeod78pctf73rhe4f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
